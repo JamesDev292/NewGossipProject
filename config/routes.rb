@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   root "gossips#index"
   resources :gossips
   resources :users
-  resources :sessions
+  resources :sessions, only: [:new, :create, :destroy]
 
 
 

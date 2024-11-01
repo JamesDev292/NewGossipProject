@@ -33,7 +33,7 @@
       <%= link_to "Acceuil", root_path %>
       <%= link_to "Se connecter / S'inscrire", new_session_path %>
 
-      <li><%= link_to "Se déconnecter", root_path(session.id), method: :delete %></li>
+      <li><%= link_to "Se déconnecter", new_session_path(session.id), method: :delete %></li>
     
     
     </ul>
