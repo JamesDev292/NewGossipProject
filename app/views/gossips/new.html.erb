@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Créer un potin</title>
+        
+    </head>
+    <body>
+        <header>
+            <div class="menu">
+
+            <%= link_to "Home", gossips_path, class: "lien" %>
+
+            <a class="btnnew" href="/gossips/new">
+                New gossip
+            </a>
+            </div>
+        </header>
+
+
+        <h1> Créer un potin </h1>
+        <form action="<%= gossips_path %>" method="POST">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="text" name="gossip_title" placeholder="Entrez un titre">
+            <input type="text" name="gossip_content" placeholder="Entrez votre gossip ici">
+            <input type="submit" value="Valider">
+        </form>
+
+
+    </body>
+</html>
+
