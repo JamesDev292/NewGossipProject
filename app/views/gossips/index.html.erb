@@ -1,4 +1,18 @@
-<h1>Bienvenue sur le site Gossip Project</h1>
+<h1>Bienvenue sur le site Gossip Project <%= current_user.first_name %> <%= current_user.last_name %> </h1>
 
 # ajouts - bouton - login - logout - s'inscrire - home=index
 # vue du nouveaux potin cree
+<h1> Bienvenue </h1>
+<%= link_to "créer un gossip", new_gossip_path, class: "lien" %>
+<p> Voici la liste des potins : </p>
+
+
+
+<p>
+  <% @gossip.reverse.each do |gossip| %>
+   
+      <h3><%= link_to gossip.title, gossip_path(gossip) %></h3>
+      <p>Écrit par : <%= gossip.user&.first_name  %></p>
+      <a href="<%= edit_gossip_path(gossip.id)%>" class="btn btn-defaut">Editer</a>
+  <% end %>
+</p>

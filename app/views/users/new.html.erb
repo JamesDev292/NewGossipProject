@@ -1,19 +1,28 @@
 <html>
-    <head>
-        <h1>Creer un nouvel utilisateur</h1>
-    </head>
-    
-    <body>
-        <div>
-            <form action="<%= users_path %>" method="POST">
-                <p> <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"> </p>
-                <p> <input type="text" name="first_name" placeholder="Entrez votre prénom"> </p>
-                <p> <input type="text" name="last_name" placeholder="Entrez votre nom"> </p>
-                <p> <input type="text" name="age" placeholder="Entrez votre age"> </p>
-                <p> <input type="text" name="email" placeholder="Entrez votre email"> </p>
-                <p> <input type="text" name="password" placeholder="Entrez votre mot de passe"> </p>
-                <p> <input type="submit" value="Valider"> </p>
-            </form>
-        </div>
-    </body>
+  <head>
+    <h1>Créer un nouvel utilisateur</h1>
+  </head>
+
+  <body>
+    <div>
+      <%= form_with model: @user, local: true do |form| %>
+        <p> <%= form.hidden_field :authenticity_token, value: form_authenticity_token %> </p>
+        
+        <p> <%= form.text_field :first_name, placeholder: "Entrez votre prénom" %> </p>
+        <p> <%= form.text_field :last_name, placeholder: "Entrez votre nom" %> </p>
+        
+        <p>
+          <%= form.collection_select :city_id, @cities, :id, :name, prompt: "Choisissez votre ville" %>
+        </p>
+
+        <p> <%= form.number_field :age, placeholder: "Entrez votre âge" %> </p>
+        <p> <%= form.email_field :email, placeholder: "Entrez votre email" %> </p>
+        <p> <%= form.password_field :password, placeholder: "Entrez votre mot de passe" %> </p>
+        
+        <p> <%= form.submit "Valider" %> </p>
+      <% end %>
+    </div>
+  </body>
+</html>
+
 </html>

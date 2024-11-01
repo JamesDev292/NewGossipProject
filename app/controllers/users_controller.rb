@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @cities = City.all
   end
 
   def create
@@ -18,13 +19,12 @@ class UsersController < ApplicationController
     else
       render :new
     end
- 
   end
 
   private
 
   def post_params
-    params.require(:user).permit(:first_name, :last_name, :age, :email, :password)
+    params.require(:user).permit(:first_name, :last_name,:city_id, :age, :email, :password)
   end
 
 end

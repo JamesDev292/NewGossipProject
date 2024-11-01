@@ -1,107 +1,29 @@
 <html>
   <head>
     <title>Créer un potin</title>
-    <%= stylesheet_link_tag 'gossip', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
 
    </head>
         <body>
 
-            <header>
-                <div class="menu">
+        <h1> Gossip N° <%= params[:id] %> </h1>
 
-                <%= link_to "Home", gossips_path, class: "lien" %>
-                <a class="lien">Gossip</a>
-                <%= link_to "Contact", static_contact_contact_path, class: "lien" %>
-                <%=  link_to "Team", static_team_team_path, class: "lien" %>
-                <a class="btnnew" href="/gossips/new">
-                    New gossip
-                    <%= image_tag "plus.png", class: "plusimg", alt: "Plus" %>
-                </a>
-
-                </div>
-            </header>
-
-
-        <div class="gossippages">
-            <div class="headergossip">
-            <div class="imgusertext">
-            <%= image_tag "utilisateur.png", class: "userbdimgrecent", alt: "Plus" %>
-            <%= link_to "@#{@gossip.user.first_name}", "/show/#{@gossip.id}", class: "infogossip" %>
-            </div>
-            <p class="idgossip">#<%= @gossip.id %> </p>
-            </div>
-            <p class="title"><%= @gossip.title%></p>
-            <p class="textgossip"><%= @gossip.content %></p>
-            
-
-
-            <% @gossip.comments.each do |comment| %>
-            <%= comment.user.first_name %>:<%= comment.content%>
-            <% if current_user == comment.user %>
-            <%= link_to "modifier comment", "/gossips/#{@gossip.id}/comments/#{comment.id}", class: "infogossip" %>
-            <% else %>
-            <% end %>
-            </br>
-            <% end %>
-
-
-
-        <%= form_with(url: gossip_comments_path(@gossip), method: :post) do %>
-        <%= label_tag :content, "Ajouter un commentaire :" %>
-        <%= text_field_tag :comment_content, nil, placeholder: "Entrez votre commentaire" %>
-        <%= submit_tag "Valider" %>
-        <% end %>
-
-        <% if current_user %>
-        <div class="like">
-            <% like = @gossip.likes.find_by(user: current_user) %>
-            
-            <% if like %>
-            <%= form_with(url: gossip_like_path(@gossip, like), method: :delete, local: true, id: "unlike-form-#{like.id}") do %>
-                <div>
-                <%= link_to image_tag("coeurrouge.png", alt: "Unlike", class: "coeur"), "#", 
-                    onclick: "event.preventDefault(); document.getElementById('unlike-form-#{like.id}').submit();" %>
-                </div>
-            <% end %>
-            <% else %>
-            <%= form_with(url: gossip_likes_path(@gossip), method: :post, local: true, id: "like-form-#{@gossip.id}") do %>
-                <div>
-                <%= link_to image_tag("coeurgris.png", alt: "Like", class: "coeur"), "#", 
-                    onclick: "event.preventDefault(); document.getElementById('like-form-#{@gossip.id}').submit();" %>
-                </div>
-            <% end %>
-            <% end %>
-            
-            <p><%= @gossip.likes.count %></p>
-        </div>
-        <% end %>
-
-
-
-
-
-
-
-
-            <p class="city">Ecrit depuis : 
-                <%= link_to "#{@gossip.user.city.name}", "/city/cityview/#{@gossip.user.city.id}", class: "infogossip" %>
-            </p>
-
-        <% if current_user == @gossip.user %>
-        <%= link_to "Éditer", edit_gossip_path(@gossip), class: "infogossip" %>
+        <p>
+        Titre : <%= @gossip.title %> 
+        </p>
+        <p>
+        Auteur :  <%= link_to @gossip.user.first_name, user_path(@gossip.user) %>
+        </p>
+        <p>
+        Contenu : <%= @gossip.content %>
+        </p>
+        <p>
+        Créer le : <%= @gossip.created_at %>
+        </p>
         
-        <a href="<%= gossip_path(@gossip) %>" class="btn" onclick="event.preventDefault(); if(confirm('Êtes-vous sûr de vouloir supprimer ce potin ?')) { document.getElementById('delete-form-<%= @gossip.id %>').submit(); }">Supprimer</a>
-        
-        <%= form_with(model: @gossip, method: :delete, local: true, id: "delete-form-#{@gossip.id}", style: "display: none;") do |form| %>
-        <% end %>
-        <% else %>
-        <% end %>
-
-
-        </div>
-
-
-
+        <p>
+        edition :  <%= link_to "edite" , edit_gossip_path %>
+        </p>
 
 
         </body>

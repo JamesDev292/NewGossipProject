@@ -1,0 +1,37 @@
+<html>
+  
+    <div class="container">
+        <div class="gridleft">
+            
+            <h3>The Gossips</h3>
+        </div>
+
+        <div class="gridright">
+            <h1>Sign in</h1>
+            <%= form_with url: sessions_path, local: true do |form| %>
+                <div>
+                    <%= form.label :email, class: "namein" %></br>
+                    <div class="in">
+                    <%= form.email_field :email, required: true, class: "inputlogin" %>
+                </div>
+        </div>
+        <div>
+            <%= form.label :password, class: "namein" %></br>
+            <div class="in">
+            <%= form.password_field :password, required: true, class: "inputlogin" %>
+            </div>
+        </div>
+        <div>
+            <%= form.submit "Log in", class: "btncologin" %>
+        </div>
+        <% end %>
+
+            <p class="nocompte">Tu n'as pas de compte ?<a class="linkcree" href="/users/new">Créer ici</a></p>
+
+            <% if flash[:danger] %>
+                <div class="alert alert-danger"><%= flash[:danger] %> </div>
+            <% end %>
+        </div>
+    </div>
+</boyd>
+</html>
