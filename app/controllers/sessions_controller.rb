@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id) # Supprime l'ID de l'utilisateur de la session
-    redirect_to new_session_path, notice: "Vous êtes déconnecté."
+    # redirect_to root_path, notice: "Vous êtes déconnecté."
   end
 
 

@@ -20,9 +20,25 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <!-- Compressed CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
+
+        <!-- Compressed JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
+  <body class="text-center">
+  <header>
+    <ul class="menu align-center">
+      <%= link_to "Acceuil", root_path %>
+      <%= link_to "Se connecter / S'inscrire", new_session_path %>
+
+      <li><%= link_to "Se déconnecter", root_path(session.id), method: :delete %></li>
+    
+    
+    </ul>
+  </header>
+  
     <%= yield %>
   </body>
 </html>
